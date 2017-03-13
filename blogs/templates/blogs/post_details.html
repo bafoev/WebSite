@@ -1,0 +1,27 @@
+{% extends 'core/base.html' %}
+
+{% block title %}
+
+{% endblock %}
+
+{% block page_title %}
+    Пост "{{ object.title }}".
+{% endblock %}
+
+{% block content %}
+    <a href="{% url 'blogs:blog_details' object.blog_id %}"><h3>Блог</h3></a>
+    <div>{{ object.content }}</div>
+    <div>
+        <h4>Комментарии</h4>
+        {% for comment in object.comment_set.all %}
+            <div style="border: dotted">
+                <h4 style="color: brown">{{ forloop.counter }})
+                    <span style="color: cornflowerblue">{{ comment.author }}:</span> {{ comment.title }}
+                </h4>
+                <div>{{ comment.text }}</div>
+            </div>
+        {% endfor %}
+
+    </div>
+
+{% endblock %}

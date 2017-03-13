@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head>
+    <title>{% block title %}{% endblock %}</title>
+</head>
+<meta charset="utf-8">
+<body>
+<tite>Блог</tite>
+ <style>
+   .layer1 {
+    font: 14pt serif;
+   }
+   h1 {
+    font: bold italic 110% serif;;
+   }
+  </style>
+ </head>
+ <body>
+  <div class="layer1">
+<h1>{% block page_title %}{% endblock %}</h1>
+
+<div>
+    {% block content %}
+
+    {% endblock %}
+</div>
+
+<div>
+    {% block footer %}<hr/>{% endblock %}
+</div>
+
+</body>
+
+</html>
