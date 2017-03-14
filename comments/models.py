@@ -7,8 +7,8 @@ class Comment(models.Model):
     author = models.ForeignKey(settings.AUTH_USER_MODEL)
     post = models.ForeignKey('blogs.Post')
 
-    title = models.CharField(max_length=30)
-    text = models.TextField(max_length=300)
+    title = models.CharField(max_length=255)
+    text = models.TextField()
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
