@@ -1,4 +1,3 @@
-
 {% extends 'core/base.html' %}
 
 {% block title %}
@@ -12,10 +11,22 @@
 {% block content %}
     <h3><a href="{% url 'blogs:blog_list' %}">Список блогов</a></h3>
     <div>{{ object.description }}</div>
-    {% for post in object.post_set.all %}
+
+    {% if user == object.owner %}
+        <a href="{% url 'blogs:create_post' %}">Создать пост. </a>
+    {% endif %}
+
+    {% for post in object.posts.all %}
         <div style="border: dashed">
-            <div>{{ forloop.counter }}: <a href="{% url 'blogs:post_details' pk=post.id %}">{{ post.title }}</a>.</div>
-            <div><small>Автор: {{ post.author }}</small></div>
+            <div>
+                {{ forloop.counter }}: <a href="{% url 'blogs:post_details' pk=post.id %}">{{ post.title }}</a>.
+                {% if user == post.author %}
+                    <a href="{% url 'blogs:update_post' pk=post.id %}">Редактировать. </a>
+                {% endif %}
+            </div>
+            <div>
+                <small>Автор: {{ post.author }}</small>
+            </div>
         </div>
     {% endfor %}
 

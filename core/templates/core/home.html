@@ -1,18 +1,18 @@
 {% extends 'core/base.html' %}
 
 {% block title %}
-Главная страница блога
+    Главная страница блога
 {% endblock %}
 
 {% block page_title %}
-Главная страница блога
+    Главная страница блога
 {% endblock %}
 
 {% block content %}
 
-<a href="{% url 'blogs:blog_list' %}"><h3>Cписок блогов</h3></a>
-<div style="color: #444444;">число пользователей: {{ n_users }}</div>
-<div>число блогов: {{ n_blogs }}</div>
-<div>число постов: {{ n_posts }}</div>
-<div>число комментариев : {{ n_comments }}</div>
+    <a href="{% url 'blogs:blog_list' %}"><h3>Cписок блогов</h3></a>
+    <div style="color: #444444;">число пользователей: {{ n_users }}</div>
+    <div>число блогов: {{ n_blogs }}</div>
+    <div>число постов: {{ n_posts }}</div>
+    <div>число комментариев : {{ n_comments }}</div>
 {% endblock %}

@@ -15,8 +15,11 @@
         <h4>Комментарии</h4>
         {% for comment in object.comment_set.all %}
             <div style="border: dotted">
-                <h4 style="color: brown">{{ forloop.counter }})
-                    <span style="color: cornflowerblue">{{ comment.author }}:</span> {{ comment.title }}
+                <h4 style="color: red">{{ forloop.counter }})
+                    {% if comment.author.avatar %}
+                        <img src="{{ comment.author.avatar.url }}">
+                    {% endif %}
+                    <span style="color: darkgreen">{{ comment.author }}:</span> {{ comment.title }}
                 </h4>
                 <div>{{ comment.text }}</div>
             </div>

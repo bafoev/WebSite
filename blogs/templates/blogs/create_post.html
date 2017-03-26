@@ -1,0 +1,18 @@
+{% extends 'core/base.html' %}
+
+{% block page_title %}
+    Создание поста.
+{% endblock %}
+
+{% block title %}
+    Создание поста.
+{% endblock %}
+
+{% block content %}
+    <form method="post" action="{% url 'blogs:create_post' %}">
+        {% csrf_token %}
+        <div>{{ form.errors }}</div>
+
+        <input type="submit" value="Создать">
+    </form>
+{% endblock %}

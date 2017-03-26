@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.conf import settings
 from django.db import models
+from blogs.models import Post
 
 
 class Comment(models.Model):

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/html">
 <meta charset="utf-8">
 <head>
     <title>{% block title %}{% endblock %}</title>
@@ -7,28 +7,43 @@
 <meta charset="utf-8">
 <body>
 <tite>Блог</tite>
- <style>
-   .layer1 {
-    font: 14pt serif;
-   }
-   h1 {
-    font: bold italic 110% serif;;
-   }
-  </style>
- </head>
- <body>
-  <div class="layer1">
-<h1>{% block page_title %}{% endblock %}</h1>
+<style>
+    .layer1 {
+        font: 14pt serif;
+    }
 
-<div>
-    {% block content %}
+    h1 {
+        font: bold italic 110% serif;;
+    }
+</style>
+</head>
+<body>
+<div class="layer1">
+    <h1>{% block page_title %}{% endblock %}</h1>
 
-    {% endblock %}
-</div>
+    <div>
+        {% block content %}
 
-<div>
-    {% block footer %}<hr/>{% endblock %}
-</div>
+        {% endblock %}
+    </div>
+
+
+    </div>
+
+    <div>
+        {% block footer %}
+            <hr/>
+            {% if user.is_authenticated %}
+            <div>
+                Привет, {{ user.username }}.
+            </div>
+            <a href="{% url 'core:logout' %}">Выйти</a>
+        {% else %}
+            <a href="{% url 'core:login' %}">Войти</a>
+        {% endif %}
+
+        {% endblock %}
+    </div>
 
 </body>
 

@@ -22,6 +22,9 @@ urlpatterns = [
     url(r'^$', HomePageView.as_view(), name='home'),
     url(r'^admin/', admin.site.urls),
     url(r'^blogs/', include('blogs.urls', namespace='blogs')),
+    url(r'^core/', include('core.urls', namespace='core')),
+
+
 ]
 
 from django.conf import settings

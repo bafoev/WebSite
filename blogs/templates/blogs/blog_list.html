@@ -4,12 +4,30 @@
 {% block page_title %}Список блогов.{% endblock %}
 
 {% block content %}
-    <a href="{% url 'home' %}"><h3>Главная страница сайта</h3></a>
+    <a href="{% url 'home' %}"><h3>Домашняя страница</h3></a>
+
+    {% if user.is_authenticated %}
+        <a href="{% url 'blogs:create_blog' %}">Создать новый блог</a>
+    {% endif %}
+
+    <form method="get" action="{% url 'blogs:blog_list' %}">
+        {{ sortform.errors }}
+        {{ sortform.as_p }}
+        <input type="submit" value="Сортировать">
+    </form>
+
     {% for blog in object_list %}
         <div style="border: dashed; margin: 1em">
-            <div><a href="{% url 'blogs:blog_details' pk=blog.id %}"><h3>{{ blog.title }}</h3></a></div>
+            <div>
+                <a href="{% url 'blogs:blog_details' pk=blog.id %}"><h3>{{ blog.title }}</h3></a>
+                {% if user == blog.owner %}
+                    <a href="{% url 'blogs:update_blog' pk=blog.id %}">Редактировать</a>
+                {% endif %}
+            </div>
             <div>{{ blog.description }}</div>
-            <div><small>Владелец: {{ blog.owner }}</small></div>
+            <div>
+                <small>Владелец: {{ blog.owner }}</small>
+            </div>
         </div>
     {% endfor %}
 

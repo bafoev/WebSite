@@ -1,5 +1,5 @@
 from django.views.generic import TemplateView
-from blogs.models import Blog, Post
+from blogs.models import Blog, Post, Like
 from comments.models import Comment
 from core.models import User
 
@@ -13,4 +13,5 @@ class HomePageView(TemplateView):
         context['n_blogs'] = Blog.objects.all().count()
         context['n_posts'] = Post.objects.all().count()
         context['n_comments'] = Comment.objects.all().count()
+        context['n_likes'] = Like.objects.all().count()
         return context
