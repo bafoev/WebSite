@@ -35,7 +35,7 @@
             <hr/>
             {% if user.is_authenticated %}
             <div>
-                Привет, {{ user.username }}.
+                Добро пожаловать, {{ user.username }}.
             </div>
             <a href="{% url 'core:logout' %}">Выйти</a>
         {% else %}

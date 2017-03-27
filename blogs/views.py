@@ -11,8 +11,9 @@ from comments.models import Comment
 
 class SortForm(forms.Form):
     sort = forms.ChoiceField(choices=(
-        ('title', 'заголовок'),
-        ('description', 'описание')))
+        ('title', u'заголовок'),
+        ('description', u'описание')))
+    search = forms.CharField(required=False)
 
 
 class BlogList(ListView):
@@ -34,6 +35,8 @@ class BlogList(ListView):
         qs = super(BlogList, self).get_queryset()
         if self.sorting_form.is_valid():
             qs = qs.order_by(self.sorting_form.cleaned_data['sort'])
+            if self.sorting_form.cleaned_data['search']:
+                qs = qs.filter(title__icontains=self.sorting_form.cleaned_data['search'])
         return qs
 
 
