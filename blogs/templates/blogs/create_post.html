@@ -12,7 +12,9 @@
     <form method="post" action="{% url 'blogs:create_post' %}">
         {% csrf_token %}
         <div>{{ form.errors }}</div>
-
+        <table>
+            {{ form.as_table }}
+        </table>
         <input type="submit" value="Создать">
     </form>
 {% endblock %}

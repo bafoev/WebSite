@@ -5,26 +5,26 @@
 {% endblock %}
 
 {% block page_title %}
-    Пост "{{ object.title }}".
+    Пост "{{ post.title }}".
 {% endblock %}
 
 {% block content %}
-    <a href="{% url 'blogs:blog_details' object.blog_id %}"><h3>Блог</h3></a>
-    <div>{{ object.content }}</div>
+    <a href="{% url 'blogs:blog_details' pk=post.blog_id %}"><h3>Блог</h3></a>
+    <div>{{ post.content }}</div>
+    <hr>
+    <div>Лайков: {{ post.likes.count }}</div>
     <div>
-        <h4>Комментарии</h4>
-        {% for comment in object.comment_set.all %}
-            <div style="border: dotted">
-                <h4 style="color: red">{{ forloop.counter }})
-                    {% if comment.author.avatar %}
-                        <img src="{{ comment.author.avatar.url }}">
-                    {% endif %}
-                    <span style="color: darkgreen">{{ comment.author }}:</span> {{ comment.title }}
-                </h4>
-                <div>{{ comment.text }}</div>
-            </div>
-        {% endfor %}
-
+        {% include "comments/comments_list.html" with object_list=post.comment_set.all %}
     </div>
+
+    {% if user.is_authenticated %}
+        <form method="post" action="{% url 'blogs:post_details' pk=post.id %}">
+            {% csrf_token %}
+            <table>
+                {{ form.as_table }}
+            </table>
+            <input type="submit" value="Отправить">
+        </form>
+    {% endif %}
 
 {% endblock %}

@@ -1,0 +1,19 @@
+{% extends 'core/base.html' %}
+
+{% block title %}
+
+{% endblock %}
+
+{% block page_title %}
+
+{% endblock %}
+
+{% block content %}
+    <form method="post" action="{% url 'core:register' %}">
+        {% csrf_token %}
+        <table>
+            {{ form.as_table }}
+        </table>
+        <input type="submit" value="Зарегистрироваться">
+    </form>
+{% endblock %}
