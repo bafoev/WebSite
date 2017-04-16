@@ -9,7 +9,7 @@
 {% endblock %}
 
 {% block content %}
-    <h3><a href="{% url 'blogs:blog_list' %}">Список блогов</a></h3>
+    <nav><h3><a href="{% url 'blogs:blog_list' %}">Список блогов</a></h3></nav>
     <div>{{ object.description }}</div>
 
     {% if user == object.owner %}
@@ -17,17 +17,17 @@
     {% endif %}
 
     {% for post in object.posts.all %}
-        <div style="border: dashed">
-            <div>
+        <nav style="border: dashed">
+            <nav>
                 {{ forloop.counter }}: <a href="{% url 'blogs:post_details' pk=post.id %}">{{ post.title }}</a>.
                 {% if user == post.author %}
                     <a href="{% url 'blogs:update_post' pk=post.id %}">Редактировать. </a>
                 {% endif %}
-            </div>
+            </nav>
             <div>
                 <small>Автор: {{ post.author }}</small>
             </div>
-        </div>
+        </nav>
     {% endfor %}
 
 {% endblock %}

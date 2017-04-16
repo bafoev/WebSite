@@ -1,3 +1,11 @@
 from django.shortcuts import render
 
-# Create your views here.
+from django.views.generic import ListView
+
+from comments.models import Comment
+
+
+class CommentsList(ListView):
+    model = Comment
+
+    template_name = 'comments/comments_list.html'

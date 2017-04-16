@@ -1,34 +1,47 @@
 {% extends 'core/base.html' %}
 
+{% load static %}
+
+{% load bootstrap3 %}
+
 {% block title %}Список блогов.{% endblock %}
-{% block page_title %}Список блогов.{% endblock %}
+
 
 {% block content %}
+
+
+
     <a href="{% url 'home' %}"><h3>Домашняя страница</h3></a>
 
     {% if user.is_authenticated %}
         <a href="{% url 'blogs:create_blog' %}">Создать новый блог</a>
     {% endif %}
 
-    <form method="get" action="{% url 'blogs:blog_list' %}">
-        {{ sortform.errors }}
-        {{ sortform.as_p }}
-        <input type="submit" value="Сортировать">
-    </form>
+    <header class="form-group">
+        <form method="get" action="{% url 'blogs:blog_list' %}">
 
-    {% for blog in object_list %}
-        <div style="border: rebeccapurple; margin: 1em">
-            <div>
-                <a href="{% url 'blogs:blog_details' pk=blog.id %}"><h3>{{ blog.title }}</h3></a>
-                {% if user == blog.owner %}
-                    <a href="{% url 'blogs:update_blog' pk=blog.id %}">Редактировать</a>
-                {% endif %}
+            {% bootstrap_form filter_form %}
+
+            {% buttons submit='Сортировать' %}{% endbuttons %}
+
+        </form>
+    </header>
+    <footer class="list-group">
+        {% for blog in object_list %}
+            <div class="list-group-item">
+                <div>
+                    <a href="{% url 'blogs:blog_details' pk=blog.id %}"><h3>{{ blog.title }}</h3></a>
+                    {% if user == blog.owner %}
+                        <a href="{% url 'blogs:update_blog' pk=blog.id %}">Редактировать</a>
+                    {% endif %}
+                </div>
+                <div>{{ blog.description }}</div>
+                <div>
+                    <small>Владелец: {{ blog.owner }}</small>
+                </div>
             </div>
-            <div>{{ blog.description }}</div>
-            <div>
-                <small>Владелец: {{ blog.owner }}</small>
-            </div>
-        </div>
-    {% endfor %}
+        {% endfor %}
+    </footer>
+
 
 {% endblock %}

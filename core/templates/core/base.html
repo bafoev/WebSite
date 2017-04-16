@@ -1,50 +1,77 @@
+{% load static %}
+
+{% load bootstrap3 %}
+
+{% bootstrap_css %}
+
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/html">
 <meta charset="utf-8">
-<head>
+<html>
+<header>
+
     <title>{% block title %}{% endblock %}</title>
-</head>
-<meta charset="utf-8">
-<body>
-<tite>Блог</tite>
-<style>
-    .layer1 {
-        font: 14pt serif;
-    }
+    <link href="{% static 'core/bootstrap/css/bootstrap.css' %}" rel="stylesheet">
+    <link href="{% static 'core/bootstrap/js/bootstrap.js' %}" rel="script">
 
-    h1 {
-        font: bold italic 110% serif;;
-    }
-</style>
-</head>
-<body>
-<div class="layer1">
-    <h1>{% block page_title %}{% endblock %}</h1>
 
-    <div>
-        {% block content %}
+</header>
 
-        {% endblock %}
-    </div>
+{% block extra_css %}{% endblock %}
 
+
+<body class="bg-info">
+{# <div class="navbar navbar-inverse"> #}
+<div class="container-fluid">
+    <div class="navbar-header">
 
     </div>
+    <ul class="nav navbar-nav">
 
-    <div>
-        {% block footer %}
-            <hr/>
-            {% if user.is_authenticated %}
+    </ul>
+</div>
+
+<header class="navbar-right">
+    {% if user.is_anonymous %}
+        <a class="btn btn-success navbar-btn " href="{% url 'core:login' %}">Вход</a>
+        <a class="btn btn-info navbar-btn " href="{% url 'core:register' %}">Регистрация</a>
+    {% else %}
+        {#                        <p class="navbar-text">Привет, {{ user.username }}</p>#}
+        <a class="btn btn-inverse" href="{% url 'core:logout' %}">Выход</a>
+    {% endif %}
+</header>
+
+
+<div>
+    {% block content %}
+        <header>{% block page_title %}
+            <div class="container-fluid">
+                {% autoescape off %}{% bootstrap_messages %}{% endautoescape %}
+            </div>
+        {% endblock %}</header>
+
+    {% endblock %}
+
+</div>
+
+<footer>
+    {% block footer %}
+        <hr/>
+        {% if user.is_authenticated %}
             <div>
                 Добро пожаловать, {{ user.username }}.
             </div>
-            <a href="{% url 'core:logout' %}">Выйти</a>
+            <nav>
+            <a href="{% url 'core:logout' %}">
+                <button type="submit" class="btn">Выйти</button>
+            </a>
         {% else %}
-            <a href="{% url 'core:login' %}">Войти</a>
+            <a href="{% url 'core:login' %}"></a>
         {% endif %}
+    </nav>
 
-        {% endblock %}
-    </div>
-
+    {% endblock %}
+</footer>
+<script src="{% static 'core/jquery/jquery.min.js' %}"></script>
+<script src="{% static 'core/js/core.js' %}"></script>
 </body>
-
 </html>

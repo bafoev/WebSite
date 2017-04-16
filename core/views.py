@@ -9,9 +9,6 @@ from django.template.context_processors import csrf
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import get_user_model
 from django.contrib.auth.views import login
-# Create your views here.
-
-
 
 
 class HomePageView(TemplateView):
@@ -46,8 +43,3 @@ def register(request):
     token.update(csrf(request))
     token['form'] = form
     return render_to_response('core/register.html', token)
-
-
-
-
-

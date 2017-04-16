@@ -1,18 +1,19 @@
 {% extends 'core/base.html' %}
-
+{% load bootstrap3 %}
 {% block title %}
-    Главная страница блога
-{% endblock %}
-
-{% block page_title %}
     Главная страница блога
 {% endblock %}
 
 {% block content %}
 
-    <a href="{% url 'blogs:blog_list' %}"><h3>Cписок блогов</h3></a>
-    <div style="color: #444444;">число пользователей: {{ n_users }}</div>
-    <div>число блогов: {{ n_blogs }}</div>
-    <div>число постов: {{ n_posts }}</div>
-    <div>число комментариев : {{ n_comments }}</div>
+    <nav><a href="{% url 'blogs:blog_list' %}"><h3>Cписок блогов</h3></a></nav>
+    <ul class="list-group">
+        <li class="list-group-item">число пользователей: {{ n_users }}</li>
+        <li class="list-group-item">число блогов: {{ n_blogs }}</li>
+        <li class="list-group-item">число постов: {{ n_posts }}</li>
+        <li class="list-group-item">число комментариев : {{ n_comments }}</li>
+    </ul>
+
+
 {% endblock %}
+

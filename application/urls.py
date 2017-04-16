@@ -23,6 +23,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^blogs/', include('blogs.urls', namespace='blogs')),
     url(r'^core/', include('core.urls', namespace='core')),
+    url(r'^comments/', include('comments.urls', namespace='comments')),
 
 
 ]

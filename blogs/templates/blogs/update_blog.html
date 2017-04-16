@@ -1,5 +1,7 @@
 {% extends 'core/base.html' %}
 
+{% load bootstrap3 %}
+
 {% block title %}
     Редактирование блога.
 {% endblock %}
@@ -9,12 +11,15 @@
 {% endblock %}
 
 {% block content %}
-    <form method="post" action="{% url 'blogs:update_blog' pk=object.pk %}">
-        {% csrf_token %}
-        <div>{{ form.errors }}</div>
-        <table>
-            {{ form.as_table }}
-        </table>
-        <input type="submit" value="Сохранить">
-    </form>
+    <nav>
+        <form method="post" action="{% url 'blogs:update_blog' pk=object.pk %}">
+            {% csrf_token %}
+            <div>{{ form.errors }}</div>
+            <table>
+                {% bootstrap_form form %}
+                {% buttons submit='Сохранить' %}{% endbuttons %}
+            </table>
+
+        </form>
+    </nav>
 {% endblock %}

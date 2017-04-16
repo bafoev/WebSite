@@ -1,5 +1,7 @@
 {% extends 'core/base.html' %}
 
+{% load bootstrap3 %}
+
 {% block title %}
     Создание блога.
 {% endblock %}
@@ -10,12 +12,11 @@
 
 
 {% block content %}
-    <form method="post" action="{% url 'blogs:create_blog' %}">
-        {% csrf_token %}
-        <div>{{ form.errors }}</div>
-        <table>
-            {{ form.as_table }}
-        </table>
-        <input type="submit" value="Создать">
-    </form>
+    <nav>
+        <form method="post" action="{% url 'blogs:create_blog' %}">
+            {% csrf_token %}
+            {% bootstrap_form form %}
+            {% buttons submit='Создать' %}{% endbuttons %}
+        </form>
+    </nav>
 {% endblock %}

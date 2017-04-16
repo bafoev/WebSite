@@ -1,14 +1,19 @@
 <h4>Комментарии</h4>
 {% for comment in object_list %}
-    <div style="border: dotted;">
+    <header style="border: dotted;">
+        {% if comment.author.avatar %}
         <img src="{{ comment.author.avatar.url }}" width="5%">
+       {% endif %}
+
         <div style="display: inline-block">
             <h4 style="color: brown">
                 ({{ comment.created_at }})
                 <span style="color: cornflowerblue">{{ comment.author }}:</span> {{ comment.title }}
             </h4>
-            <div>{{ comment.text }}</div>
+            <header>{{ comment.text }}</header>
         </div>
-    </div>
+    </header>
 
 {% endfor %}
+
+
